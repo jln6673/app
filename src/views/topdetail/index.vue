@@ -10,8 +10,13 @@
     <div class="img">
       <img :src="list.coverImgUrl">
     </div>
+    <div class="bo" v-if="list.tracks">
+      <van-icon name="play-circle" class="i" />
+      <span>播放全部</span>
+      <span class="length">({{list.tracks.length}})</span>
+    </div>
     <div class="list">
-      <div class="li" v-for="(item,index) in list.tracks" :key="index">
+      <div class="li" v-for="(item,index) in list.tracks" @click="play(item.id)" :key="index">
         <span class="xuhao">{{index+1}}</span>
         <div class="names">
           <p class="name ell">{{item.name}}</p>
@@ -32,17 +37,20 @@ export default {
     }
   },
   methods: {
+    play (id) {
+      this.$store.dispatch('full', id)
+    },
     back () {
       this.$router.go(-1)
     },
     gettopdetail () {
       const url = `/api/playlist/detail?id=${this.$route.params.id}`
       this.axios.get(url).then((res) => {
-        console.log(res)
+        // console.log(res)
         if (res.status === 200) {
           this.list = res.data.playlist
         }
-        console.log(this.list)
+        // console.log(this.list)
       })
     }
   },
@@ -52,20 +60,38 @@ export default {
 }
 </script>
 <style lang="stylus" scoped>
+.bo
+  padding .2rem .4rem
+  font-size .35rem
+  display flex
+  span
+    display block
+    margin-top .12rem
+  .length
+    color grey
+    font-size .3rem
+    margin .13rem 0 0 .2rem
+  .i
+    font-size .5rem
+    color red
+    margin-right .2rem
 .mv,.more
   font-size .5rem
   padding-top .2rem
 .mv
   margin 0 .2rem
 .list
+  .li:nth-child(-n+3)>.xuhao
+    color red
   .li
     padding .2rem .1rem
     display flex
     .xuhao
       font-size .45rem
-      padding-top .25rem
+      padding-top .2rem
       margin 0 .5rem
       margin-left .3rem
+      color grey
     .names
       p
         line-height .4rem
@@ -73,6 +99,7 @@ export default {
         width 4.4rem
       .name
         color black
+        font-weight 500
       .details
         font-size .22rem
         color gray

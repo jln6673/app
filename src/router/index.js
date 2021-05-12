@@ -15,7 +15,7 @@ const routes = [{
   name: 'topsong',
   component: topsong
 }, {
-  path: '/topdetail/:id',
+  path: '/topdetail/:name',
   name: 'topdatail',
   component: topdetail
 }]

@@ -1,6 +1,25 @@
 <template>
   <div>
-    <headers></headers>
+    <!-- 头部 -->
+    <div class="header">
+      <van-row>
+        <van-col class="icon" span="3">
+          <van-icon name="wap-nav" />
+        </van-col>
+        <van-col span="18">
+          <van-search
+            class="search"
+            v-model="value"
+            shape="round"
+            background="#E0E4E5"
+            placeholder="请输入搜索关键词"
+          />
+        </van-col>
+        <van-col class="icon" span="3">
+          <van-icon name="music" />
+        </van-col>
+      </van-row>
+    </div>
     <!-- banner -->
     <div class="banner">
       <van-swipe class="my-swipe"  indicator-color="white">
@@ -161,12 +180,11 @@
   </div>
 </template>
 <script>
-import Headers from '../components/header.vue'
 export default {
-  components: { Headers },
   name: 'Index',
   data () {
     return {
+      value: '',
       flg: 0,
       newsong: [],
       newdie: [],
@@ -435,4 +453,14 @@ export default {
       color white
       border-radius .3rem
       right .1rem
+// 头部
+.header
+  background-color #E0E4E5
+  box-sizing border-box
+  .search
+    padding .2rem .06rem
+  .icon
+    font-size .6rem
+    text-align center
+    line-height 1.25rem
 </style>
