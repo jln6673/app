@@ -16,7 +16,7 @@
       <span class="length">({{list.tracks.length}})</span>
     </div>
     <div class="list">
-      <div class="li" v-for="(item,index) in list.tracks" @click="play(item.id)" :key="index">
+      <div class="li" v-for="(item,index) in list.tracks" @click="play(item.id, item.name)" :key="index">
         <span class="xuhao">{{index+1}}</span>
         <div class="names">
           <p class="name ell">{{item.name}}</p>
@@ -37,8 +37,9 @@ export default {
     }
   },
   methods: {
-    play (id) {
-      this.$store.dispatch('full', id)
+    play (id, name) {
+      this.$store.dispatch('full', [id, name])
+      this.$store.dispatch('getci', id)
     },
     back () {
       this.$router.go(-1)

@@ -1,11 +1,11 @@
 <template>
   <div class="full" v-if="fullshow">
-    <van-icon name="arrow-left" @click="back()"/>
-    全屏播放器
+    <van-icon name="arrow-left" @click="off()"/>
+    <span>{{name.name}}</span>
   </div>
 </template>
 <script>
-import { mapState } from 'vuex'
+import { mapMutations, mapState } from 'vuex'
 export default {
   name: 'fullPlayer',
   data () {
@@ -14,13 +14,16 @@ export default {
     }
   },
   computed: {
-    ...mapState({ fullshow: 'showfull' }),
-    ...mapState({ getcis: 'getci' })
+    ...mapState({
+      fullshow: 'showfull',
+      name: 'mp3infor'
+    })
   },
   methods: {
-    back () {
-      this.$store.dispatch('off')
-    }
+    // back () {
+    //   this.$store.dispatch('off')
+    // }
+    ...mapMutations(['off'])
   }
 }
 </script>

@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <audio :src="geturls" autoplay loop></audio>
+  <div v-if="mp3infor.play">
+    <audio :src="mp3infor.mp3.url" autoplay loop></audio>
   </div>
 </template>
 <script>
@@ -8,7 +8,7 @@ import { mapState } from 'vuex'
 export default {
   name: 'audioPlayer',
   computed: {
-    ...mapState({ geturls: 'geturl' })
+    ...mapState({ mp3infor: 'mp3infor' })
   }
 }
 </script>
